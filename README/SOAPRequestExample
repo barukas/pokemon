@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:pok="http://www.xml.com/pokemon">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <pok:PokemonRequest>
+         <method>ABILITIES</method>
+         <name>ditto</name>
+      </pok:PokemonRequest>
+   </soapenv:Body>
+</soapenv:Envelope>
