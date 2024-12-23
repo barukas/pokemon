@@ -1,0 +1,106 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://www.xml.com/pokemon"
+           targetNamespace="http://www.xml.com/pokemon" elementFormDefault="unqualified"
+           xmlns:jxb="http://java.sun.com/xml/ns/jaxb"
+           jxb:version="2.0">
+    <xs:simpleType name="method">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ABILITIES" />
+            <xs:enumeration value="BASE_EXPERIENCE" />
+            <xs:enumeration value="HELD_ITEMS" />
+            <xs:enumeration value="ID" />
+            <xs:enumeration value="NAME" />
+            <xs:enumeration value="LOCATION_AREA_ENCOUNTERS" />
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:element name="PokemonRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="method" type="tns:method"/>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!--<xs:element name="Item">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Description" type="xs:string"/>
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string"/>
+            <xs:attribute name="curr" type="tns:method"/>
+        </xs:complexType>
+    </xs:element>-->
+
+    <xs:element name="PokemonResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Pokemon" type="tns:Pokemon"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="Pokemon">
+        <xs:sequence>
+            <!--<xs:element name="name" type="xs:string"/>-->
+            <!--<xs:element name="standard" type="xs:int"/>-->
+            <!--<xs:element name="address" type="xs:string"/>-->
+            <xs:element name="abilities" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ability">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="name" type="xs:string"/>
+                                    <xs:element name="url" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="base_experience" type="xs:int"/>
+            <xs:element name="held_items" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="item">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="name" type="xs:string"/>
+                                    <xs:element name="url" type="xs:string"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="version_details" minOccurs="0" maxOccurs="unbounded">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:sequence>
+                                        <xs:element name="rarity" type="xs:string"/>
+                                        <xs:element name="version">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="name" type="xs:string"/>
+                                                    <xs:element name="url" type="xs:string"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="id" type="xs:int"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="location_area_encounters" type="xs:string">
+                <xs:annotation>
+                    <xs:appinfo>
+                        <jxb:property name="location_area_encounters"/>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
